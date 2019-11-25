@@ -1,0 +1,65 @@
+[
+    {"name":"TV LED Samsung UE43NU7405",
+    "image":"assets/img/tv1.png",
+    "desc":"Ecran 109 cm (43') - 4K UHD - Son 20 Watts - HDMI - USB",
+    "price":499.00,
+    "ref":"125.066.158",
+    "category":"TV"},
+    
+    {"name":"TV LED LG 49SK8500",
+    "image":"assets/img/tv2.png",
+    "desc":"Ecran 123 cm (49') - 4K UHD - Son 40 Watts – HDMI - USB",
+    "price": 899.00,
+    "ref":"125.068.558",
+    "category":"TV"},
+    
+    {"name":"TV OLED Philips 65OLED973",
+    "image":"assets/img/tv3.png",
+    "desc":"Ecran 164 cm (65') - 4K UHD - Son 60 Watts - HDMI - USB",
+    "price": 3790.00,
+    "ref":"125.269.558",
+    "category":"TV"},
+    
+    {"name":"PC Gamer Acer Nitro AN515-52-70XP",
+    "image":"assets/img/pc2.png",
+    "desc":"Ecran 15,6' Full HD - Intel Core i7-8750H - Mémoire vive 8 Go - NVIDIA GeForce GTX1050",
+    "price": 999.00,
+    "ref":"125.693.444",
+    "category":"computers"},
+    
+    {"name":"Ordinateur portable Asus Zenbook UX333FA-A4041T",
+    "image":"assets/img/pc3.png",
+    "desc":"Ecran 13' - Intel Core i5-8265U : 1,6 GHz - SSD 256 Go - Mémoire vive 8 Go",
+    "price": 799.00,
+    "ref":"125.586.128",
+    "category":"computers"},
+    
+    {"name":"Ordinateur Apple Macbook Pro 13p i5 128Go Gris Sidéral 2017",
+    "image":"assets/img/pc1.png",
+    "desc":"Ecran 13,3' - Intel Core i5 bic - SSD 128 Go - Mémoire vive 8 Go",
+    "price":1349.99,
+    "ref":"125.325.128",
+    "category":"computers"},
+    
+    {"name":"Smartphone Samsung Galaxy S9+ noir",
+    "image":"assets/img/phone2.png",
+    "desc":"Ecran 6,2' - Stockage 64 Go - Batterie 3500mAh Mémoire RAM 6 Go",
+    "price":709.00,
+    "ref":"128.554.128",
+    "category":"smartphones"},
+    
+    {"name":"Smartphone Apple iPhone X Gris Sidéral 64 GO",
+    "image":"assets/img/phone3.png",
+    "desc":"Ecran 5,8' - Stockage 64 Go - Mémoire RAM 3 Go",
+    "price":899.00,
+    "ref":"128.514.128",
+    "category":"smartphones"},
+    
+    {"name":"Smartphone Huawei Mate 20 Pro Vert Emeraude",
+    "image":"assets/img/phone1.png",
+    "desc":"Ecran 6,3' - Stockage très élevé 128 Go  - Mémoire RAM 6 Go",
+    "price":799.00,
+    "ref":"122.496.256",
+    "category":"smartphones"}
+    ]
+    

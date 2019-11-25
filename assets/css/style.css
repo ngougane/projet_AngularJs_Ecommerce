@@ -1,0 +1,141 @@
+body {
+    padding-top: 150px;
+  }
+  .navbar {
+    background-image: url(../img/purple.jpg);
+    font-size: x-large;
+    border-bottom: 2px solid black;
+  }
+  .nav-link {
+    color: black;
+  }
+  .nav-link:hover {
+    color: grey;
+  }
+  #myBtn{position:absolute;
+          right:0;
+    color:white;
+    background-color: inherit;
+  }
+  
+  .titleNavBar{
+    color: white;
+  }
+  
+  
+  #myBtn:hover {
+    color: white;
+  }
+  #changeBtn {
+    list-style-type: none;
+  }
+  
+  h6 {
+    font-size: x-large;
+  }
+  i {
+    color: #4c4523;
+  }
+  a {
+    color : #4c4523;
+  }
+  a:hover {
+  color: black;
+  }
+  
+  .card-img-top{
+    max-width: 400px;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+  }
+  #footer{
+    text-align: center;
+    margin-top: 80px;
+    color: white;
+    background: url('../img/purple.jpg')
+  }
+  
+  #scroll{
+    margin-left: 900px;
+  }
+  .card{
+    margin-top: 40px;
+  }
+  
+  /* Modal début */
+  .imageArticleContanier {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+  }
+  .priceArticleContainer button {
+    width: 32px;
+    height: 32px;
+  }
+  .modal-full {
+    min-width: 70%;
+    margin: 0 auto;
+  }
+  .modal-full .modal-content {
+    min-height: 50%;
+  }
+  h5, h4, h3 {
+    font-weight: bold;
+  }
+  #total {
+    position: fixed;
+    left: 1rem;
+  }
+  .imageArticle {
+    width: 128px;
+    height: auto;
+  }
+  .quantity {
+    font-size: 1rem;
+  }
+  @media only screen and (max-width: 980px) {
+  
+    .modal-body {
+      display: grid;
+      grid-template-rows: min-content min-content min-content min-content;
+      justify-content: center;
+      align-items: start;
+    }
+    .priceArticleContainer {
+      display: grid;
+      grid-template-rows: 1fr 1fr 1fr 1fr;
+      justify-content: center;
+      margin-right: 1rem;
+    }
+    #remove {
+      width: 40%;
+      margin : auto;
+    }
+  }
+  @media only screen and (min-width: 980px) {
+  
+    .modal-body{
+      display: grid;
+      grid-template-columns: 1fr 4fr 1fr 1fr;
+      justify-content: center;
+      align-items: center;
+    }
+    .infoArticleContainer {
+      height: 100%;
+    }
+    .imageArticleContanier, .infoArticleContainer, .priceArticleContainer {
+    margin-top: 2rem;
+    }
+  }
+  /* Modal fin */
+  
+  
+  .activeCategory a{
+    color : blue;
+  }
+  
+  #presentation{
+  text-align: center;
+  }
+  

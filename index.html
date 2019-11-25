@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0">
+  <title>CFG Market</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"  />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="shortcut icon" type="image/x-icon" href="assets/img/cfgmarket.png" /> <!-- Affichage du logo CFG Market dans la fenêtre -->
+</head>
+<body ng-app="appCfg" ng-controller="displayContent"> <!-- Pour créer une application AngularJS, on doit 1/ créer l'object Javascript représentant l'application grâce à "angular.module" (dans le fichier js) 2/ et lier le code html à cet objet grâce à l'attribut ng-app (ci-contre). Le premier argument de la fonction "module" (dans le fichier js) permet de donner un nom à notre application. C'est ce nom que nous devrons utiliser pour définir l'attribut "ng-app" ici dans notre code "html". -->
+  <header id="scrolltop"> <!-- DÉBUT NAVBAR  + ID DU BOUTON SCROLL PERMETTANT DE RETOURNANT EN TÊTE DE PAGE AU CLICK-->
+    <nav class="navbar fixed-top navbar navbar-expand-md">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation"> <!--POUR LE MENU BURGER EN RESPONSIVE -->
+        <i class="fas fa-align-justify"></i>
+      </button> <!--POUR LE MENU BURGER EN RESPONSIVE -->
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav" id="changeCategoryList">
+          <li class="nav-item activeCategory">
+            <a class="nav-link titleNavBar" href="#" ng-click="changeCategory('')">Accueil<span class="sr-only">(current)</span></a> <!-- ng-click est une directive qui dit à AngularJS que faire quand un élément HTML est cliqué / ici donc, ce n'est pas un simple lien vers une partie du site, mais bien une sélection de catégorie en masquant les autres-->
+          </li>
+          <li class="nav-item">
+            <a class="nav-link titleNavBar" href="#" ng-click="changeCategory({category : 'TV'})">TV <span class="sr-only">(current)</span></a> <!-- ng-click est une directive qui dit à AngularJS que faire quand un élément HTML est cliqué -->
+          </li>
+          <li class="nav-item">
+            <a class="nav-link titleNavBar" href="#" ng-click="changeCategory({category : 'computers'})">Ordinateurs <span class="sr-only">(current)</span></a> <!-- ng-click est une directive qui dit à AngularJS que faire quand un élément HTML est cliqué -->
+          </li>
+          <li class="nav-item">
+            <a class="nav-link titleNavBar" href="#" ng-click="changeCategory({category : 'smartphones'})">Smartphones <span class="sr-only">(current)</span></a> <!-- ng-click est une directive qui dit à AngularJS que faire quand un élément HTML est cliqué -->
+          </li>
+          <li class="nav-item">
+            <button href="#myModal" type="button" class="btn grey" id="myBtn" data-toggle="modal">{{totalPriceItems() | number : 2}} € ({{totalQtyKeyBasket()}})<span class="fas fa-shopping-cart fa-2x"></span></button> <!-- BUTTON MODAL -->
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header> <!-- FIN NAVBAR -->
+  <div class="row" >   <!-- DÉBUT PRESENTATION CFG -->
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-8 offset-xl-2"> <!-- BOOSTRAP COL 12 POUR UNE LARGEUR D'AFFICHAGE IDENTIDIQUE SUR TOUS SUPPORTS -->
+      <div id="presentation">
+        <img id="logo"src="assets/img/cfgmarket.png">
+        <p>
+          <strong>CFG Market</strong>, c'est aujourd'hui près de 130 magasins en France, 8000 collaborateurs, 20 000 références disponibles sur cfgmarket.fr</p>
+          <p>et une expérience de plus de 50 ans dans le multimédia !</p>
+          <p>Une expertise que vous retrouverez au coeur de 2 marques que nous avons créées pour vous : <strong>Essentiel Clem</strong> et <strong>Magnificient G</strong>.</p>
+        </div>
+      </div>
+    </div> <!-- FIN PRESENTATION CFG -->
+    <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true"> <!-- DÉBUT DU MODAL AU CLICK SUR LE LOGO PANIER NAVBAR -->
+      <div class="modal-dialog modal-full" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title m-auto">Votre panier</h3>
+          </div>
+          <div class="modal-body p-4" id="result" ng-repeat="(key, value) in quantityBasket">
+            <div class="imageArticleContainer">
+              <img src={{cfg[key].image}} alt="image de l'article" class="imageArticle">
+              <p class="text-center mt-1">ref : {{cfg[key].ref}}</p>
+            </div>
+            <div class="infoArticleContainer">
+              <h4 class="text-center">{{cfg[key].name}}</h4>
+              <p class="text-center">{{cfg[key].desc}}</p>
+            </div>
+            <div class="priceArticleContainer ml-4">
+              <h5>{{cfg[key].price * value | number : 2}} €</h5>
+              <h6 class="quantity">Qté : {{value}}</h6>
+              <div>
+                <button type="button" name="decrease" class="btn" ng-click="lessQty(key)">-</button>
+                <button type="button" name="increase" class="btn" ng-click="addQty(key)">+</button>
+              </div>
+            </div>
+            <button type="button" name="remove" class="btn btn-primary" id="remove" ng-click="removeItem(key)">Supprimer</button>
+          </div>
+          <div class="modal-footer">
+            <h5 id="total">Total : {{totalPriceItems() | number : 2}} €</h5>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Continuer vos achats</button>
+          </div>
+        </div>
+      </div>
+    </div> <!-- FIN DU MODAL AU CLICK SUR LE PANIER-->
+    <div> <!-- DÉBUT OPTION SELECT -->
+      <select>
+        <option ng-click="changeOrder('')">Trier par</option>
+        <option ng-click="changeOrder('name')">nom A-Z</option>
+        <option ng-click="changeOrder('-name')">nom Z-A</option>
+        <option ng-click="changeOrder('price')">prix croissant</option>
+        <option ng-click="changeOrder('-price')">prix décroissant</option>
+      </select>
+    </div><!-- FIN OPTION SELECT -->
+    <div class="container-fluid"> <!--DÉBUT // SECTION QUI PERMET L'AFFICHAGE DES PRODUITS ET LE LIEN VERS LE PANIER PAR LE BOUTON "AJOUTER AU PANIER" -->
+      <div class="row">
+        <div class="card-group col-lg-4 col-md-6 col-xs-12" ng-repeat="cfg in searchFilter = (cfg | filter : filterText)| filter : filterCategory | orderBy : orderby  track by $index">
+          <div class="card">
+            <img class="card-img-top" src="{{cfg.image}}" alt="{{cfg.name}}" />
+            <div class="card-body">
+              <h3>{{cfg.name}}</h3>
+              <p>{{cfg.desc}}</p>
+              <p>{{cfg.price | number : 2}}€</p>
+            </div>
+            <div class="card-footer"> <!--DÉBUT BOUTON "AJOUTER AU PANIER"-->
+              <input type="button" name="addBasket" value="Ajouter au panier" class="btn btn-primary center" ng-click="addBasket($index)" /> <!-- ng-click est une directive qui dit à AngularJS que faire quand un élément HTML est cliqué -->
+            </div> <!-- FIN BOUTON "AJOUTER AU PANIER"-->
+          </div>
+        </div>
+      </div>
+    </div> <!--FIN // SECTION QUI PERMET L'AFFICHAGE DES PRODUITS ET LE LIEN VERS LE PANIER -->
+    <footer>   <!-- DÉBUT DU FOOTER -->
+      <div class="row" id="footer">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
+          <div class="footer">
+            <p>
+              Besoin d'aide ?<br /><br />
+              Contactez-nous<br />
+              Questions fréquentes<br />
+              Suivre une commande<br />
+              Retourner un produit<br />
+              Nos conditions de livraison<br />
+            </p>
+          </div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
+          <div class="footer">
+            <p>
+              À propos<br /><br />
+              Nos offres d’emploi<br />
+              Nos engagements<br />
+              L'espace Presse<br />
+              Nos services<br />
+              Magnificient G<br />
+              L'espace fidélité<br />
+              Cartes & Coffrets cadeaux<br />
+              Essentiel Clem<br />
+            </p>
+          </div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
+          <div class="footer">
+            <p>
+              Informations légales<br /><br />
+              Nos Conditions de Vente<br />
+              Mentions légales<br />
+              Utilisation des Cookies<br />
+              La place de marché<br />
+              Les avis en ligne<br />
+            </p>
+          </div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
+          <div class="footer">
+            <p>
+              Informations sécurité<br /><br />
+              Rappel produit<br />
+              Alerte fraude<br />
+            </p>
+          </div>
+        </div>
+      </div>
+      <a id="scroll" href="#scrolltop"> <!-- DÉBUT BOUTON SCROLL -->
+        <i class="fas fa-chevron-up"></i>
+      </a> <!-- FIN BOUTON SCROLL -->
+    </footer>   <!-- FIN DU FOOTER -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script src="assets/js/cfg.js"></script>
+  </body>
+  </html>
